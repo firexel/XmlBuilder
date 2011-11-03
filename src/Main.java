@@ -20,8 +20,8 @@ public class Main
                         .attr("attr-in-text", "attr value")
                         .close()
                     .child("child2", "another text value")
+                        .close()
                     .close()
-                .close()
                 .prettyPrint();
 
         System.out.print(xmls);
