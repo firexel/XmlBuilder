@@ -25,5 +25,17 @@ public class Main
                 .prettyPrint();
 
         System.out.print(xmls);
+
+        /*Prints following XML
+
+        <root>
+            <entry attr1="value1" attr2="value2"/>
+            <another_entry>
+                <child1 attr-in-text="attr value">some text value<child1/>
+                <child2>another text value<child2/>
+            <another_entry/>
+        <root/>
+
+         */
     }
 }
