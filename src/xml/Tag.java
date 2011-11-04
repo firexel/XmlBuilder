@@ -1,5 +1,6 @@
 package xml;
 
+import java.text.Normalizer;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -15,16 +16,13 @@ public class Tag
     List<Attribute> attributes = new LinkedList<Attribute>();
     List<Tag> childs = new LinkedList<Tag>();
 
-    public void prettyPrint(StringBuilder builder)
+    public void print(Formatter formatter, StringBuilder builder)
     {
-        prettyPrint(builder, 0);
+        print(formatter, builder, 0);
     }
 
-    protected void prettyPrint(StringBuilder builder, int indent)
+    protected void print(Formatter formatter, StringBuilder builder, int indent)
     {
-        for (int i = 0; i < indent; i++)
-            builder.append('\t');
-        
         builder.append('<');
         builder.append(name);
         for (Attribute attribute : attributes)
@@ -37,21 +35,25 @@ public class Tag
         }
         if (childs.size() == 0)
         {
-            builder.append("/>\n");
+            builder.append("/>");
         }
         else
         {
-            builder.append(">\n");
-
+            builder.append('>');
+            formatter.printLine(builder);
+            
             for (Tag tag : childs)
-                tag.prettyPrint(builder, indent + 1);
+            {
+                formatter.printIndent(builder, indent + 1);
+                tag.print(formatter, builder, indent + 1);
+                formatter.printLine(builder);
+            }
 
-            for(int i=0; i<indent; i++)
-                builder.append('\t');
+            formatter.printIndent(builder, indent);
 
             builder.append('<')
                     .append(name)
-                    .append("/>\n");
+                    .append("/>");
         }
     }
 }

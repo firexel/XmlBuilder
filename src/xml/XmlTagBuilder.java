@@ -39,13 +39,18 @@ public class XmlTagBuilder implements TagBuilder
         return new XmlTagBuilder(child, this);
     }
 
-    public TextTagBuilder child(String name, String text)
+    public TagBuilder text(String text)
     {
-        TextTag textTag = new TextTag();
-        textTag.name = name;
-        textTag.text = text;
+        TextTag textTag = new TextTag(text);
         tag.childs.add(textTag);
-        return new XmlTagBuilder(textTag, this);
+        return this;
+    }
+
+    public TagBuilder cdata(String text)
+    {
+        CDataTag cDataTag = new CDataTag(text);
+        tag.childs.add(cDataTag);
+        return this;
     }
 
     public TagBuilder close()
@@ -53,10 +58,10 @@ public class XmlTagBuilder implements TagBuilder
         return parentBuilder;
     }
 
-    public String prettyPrint()
+    public String print(Formatter formatter)
     {
         StringBuilder builder = new StringBuilder();
-        tag.prettyPrint(builder);
+        tag.print(formatter, builder);
         return builder.toString();
     }
 

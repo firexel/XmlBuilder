@@ -9,6 +9,7 @@ package xml;
 public interface TagBuilder extends TextTagBuilder
 {
     TagBuilder child(String name);
-    TextTagBuilder child(String name, String text);
+    TagBuilder text(String text);
+    TagBuilder cdata(String text);
     TagBuilder attr(String name, String value);
 }

@@ -9,6 +9,6 @@ package xml;
 public interface TextTagBuilder
 {
     TextTagBuilder attr(String name, String value);
-    String prettyPrint();
+    String print(Formatter formatter);
     TagBuilder close();
 }

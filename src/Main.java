@@ -16,13 +16,15 @@ public class Main
                     .attr("attr2", "value2")
                     .close()
                 .child("another_entry")
-                    .child("child1", "some text value")
+                    .child("child1")
                         .attr("attr-in-text", "attr value")
+                        .text("some text")
                         .close()
-                    .child("child2", "another text value")
+                    .child("child2")
+                        .cdata("text-under-cdata")
                         .close()
                     .close()
-                .prettyPrint();
+                .print(XML.FOR_HUMAN);
 
         System.out.print(xmls);
 

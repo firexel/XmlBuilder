@@ -10,28 +10,14 @@ public class TextTag extends Tag
 {
     String text = "";
 
-    @Override
-    protected void prettyPrint(StringBuilder builder, int indent)
+    public TextTag(String text)
     {
-        for (int i = 0; i < indent; i++)
-            builder.append('\t');
+        this.text = text;
+    }
 
-        builder.append('<')
-                .append(name);
-
-        for (Attribute attribute : attributes)
-        {
-            builder.append(' ')
-                    .append(attribute.name)
-                    .append("=\"")
-                    .append(attribute.value)
-                    .append("\"");
-        }
-
-        builder.append('>')
-                .append(text)
-                .append('<')
-                .append(name)
-                .append("/>\n");
+    @Override
+    protected void print(Formatter formatter, StringBuilder builder, int indent)
+    {
+        builder.append(text);
     }
 }
