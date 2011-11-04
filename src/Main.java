@@ -1,5 +1,8 @@
 import xml.XML;
 
+import java.util.Map;
+import java.util.TreeMap;
+
 /**
  * Created by IntelliJ IDEA.
  * User: alex
@@ -10,6 +13,7 @@ public class Main
 {
     public static void main(String argv[])
     {
+        // simple inline example
         String xmls = XML.build("root")
                 .child("entry")
                     .attr("attr1", "value1")
@@ -26,7 +30,7 @@ public class Main
                     .close()
                 .print(XML.FOR_HUMAN);
 
-        System.out.print(xmls);
+        System.out.println(xmls);
 
         /*Prints following XML
 
@@ -43,5 +47,45 @@ public class Main
         <root/>
 
          */
+
+        // mapping example
+        Map<String, String> attributesMAp = new TreeMap<String, String>();
+        attributesMAp.put("status", "online");
+        attributesMAp.put("login", "firexel");
+        attributesMAp.put("password", "qwerty");
+        Map<String, String> childMap = new TreeMap<String, String>();
+        childMap.put("status", "offline");
+        childMap.put("login", null);
+        childMap.put("password", "123456");
+        String mappedXml = XML.build("root")
+                .child("user")
+                    .attrs(attributesMAp)
+                    .close()
+                .child("user")
+                    .childs(childMap)
+                    .close()
+                .print(XML.FOR_HUMAN);
+        System.out.println(mappedXml);
+
+        /* Prints following XML
+
+        <root>
+            <user login="firexel" password="qwerty" status="online"/>
+            <user>
+                <login>
+                    null
+                <login/>
+                <password>
+                    123456
+                <password/>
+                <status>
+                    offline
+                <status/>
+            <user/>
+        <root/>
+
+         */
+
+
     }
 }

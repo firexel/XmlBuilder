@@ -1,5 +1,7 @@
 package xml;
 
+import java.util.Map;
+
 /**
  * Created by IntelliJ IDEA.
  * User: alex
@@ -8,7 +10,4 @@ package xml;
  */
 public interface TextTagBuilder
 {
-    TextTagBuilder attr(String name, String value);
-    String print(Formatter formatter);
-    TagBuilder close();
 }

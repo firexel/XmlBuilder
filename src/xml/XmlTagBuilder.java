@@ -1,4 +1,7 @@
 package xml;
+
+import java.util.Map;
+
 /**
  * Created by IntelliJ IDEA.
  * User: alex
@@ -31,12 +34,39 @@ public class XmlTagBuilder implements TagBuilder
         return this;
     }
 
+    public TagBuilder attrs(Map<String, ?> attrs)
+    {
+        for(String key : attrs.keySet())
+        {
+            Object value = attrs.get(key);
+            if(value != null)
+                attr(key, value.toString());
+            else
+                attr(key, "null");
+        }
+        return this;
+    }
+
     public TagBuilder child(String name)
     {
         Tag child = new Tag();
         child.name = name;
         tag.childs.add(child);
         return new XmlTagBuilder(child, this);
+    }
+
+    public TagBuilder childs(Map<String, ?> attrs)
+    {
+        for(String key : attrs.keySet())
+        {
+            Object value = attrs.get(key);
+            String string = "null";
+            if(value != null)
+                string = value.toString();
+
+            child(key).text(string);
+        }
+        return this;
     }
 
     public TagBuilder text(String text)
